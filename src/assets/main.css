@@ -13,7 +13,29 @@ a {
 
 body {
   font-family: Roboto;
+  background-color: #ebe8e8;
 }
+
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+main {
+  padding: 40px 0 0 0;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.title {
+  font-weight: bold;
+  text-align: center;
+}
+
 @font-face {
   font-family: 'Roboto';
   src: url('Roboto-Regular.ttf');

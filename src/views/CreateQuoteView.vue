@@ -1,7 +1,191 @@
-<template>
-  <div class="about">
+<script setup>
+import { useForm, Field, Form } from 'vee-validate'
+import { ref } from 'vue'
+import api from '../api';
 
-  </div>
+const { defineInputBinds, values, setFieldValue, meta, validate } = useForm({
+  initialValues: {
+    author: '',
+    quote: '',
+    genre: ""
+  },
+})
+
+const author = defineInputBinds('author')
+const quote = defineInputBinds('quote')
+const genre = defineInputBinds('genre')
+
+const genres = ref([])
+
+const validateQuote = (quote) => !(quote.length && quote.trim().length) ? "Quote is required" : true
+const validateAuthorName = (name) => {
+  if (!(name && name.trim())) {
+    return 'Author`s name is required'
+  }
+  if (name.match(/(\d+)/)) {
+    return 'Name of author cant consist of numbers'
+  }
+  return true
+}
+const validateGenreName = () => {
+  if (!genres.value.length) {
+    return 'Tag at least 1 genre'
+  }
+  return true
+}
+const handleAddGenre = () => {
+  if (genre.value.value.length === 0) {
+    alert('You need to fill genre name')
+    return;
+  }
+  if (genres.value.find((e) => e === genre.value.value)) {
+    alert('You already wrote such tag')
+    return;
+  }
+
+  genres.value.push(genre.value.value)
+  setFieldValue('genre', '')
+}
+const handleDeleteGenre = (genre) => {
+  genres.value = genres.value.filter(e => e !== genre)
+}
+const onSubmit = (e) => {
+  const time = new Date().toLocaleString()
+
+  api.createQuote({
+    ...values,
+    createdAt: time,
+    lastEdited: time,
+    genres: genres.value
+  }).then(res => {
+    if (res.statusText == 'Created') {
+      alert("Your quote has been created! Go to home page and find it")
+    }
+  })
+}
+</script>
+<template>
+  <main class="container">
+    <Form name="createQuote" :on-submit="onSubmit" class="quote-form">
+      <h2 class="title">Here you can create any quote!</h2>
+      <Field name="quote" v-slot="{ field, errorMessage }" :rules="validateQuote" type="text" v-bind="quote">
+        <textarea class="field quote" required placeholder="Your quote" type="text" v-bind="field" name="quote" />
+        <p class="error">{{ errorMessage }}</p>
+      </Field>
+      <Field name="author" v-slot="{ field, errorMessage }" :rules="validateAuthorName" type="text" v-bind="author">
+        <input class="field" placeholder="Name of author" type="text" v-bind="field" name="author" />
+        <p class="error">{{ errorMessage }}</p>
+      </Field>
+      <Field name="genre" v-slot="{ field, errorMessage }" :rules="validateGenreName" type="text" v-bind="genre">
+        <div class="genre-field">
+          <input class="field genre-inp" :value="genre.value" placeholder="Genre" @keyup.enter="handleAddGenre"
+            type="text" v-bind="field" name="genre" />
+          <button type="button" class="btn genre-btn" @click="handleAddGenre">Click to add Genre</button>
+        </div>
+        <ul class="genre-list">
+          <li v-for="(gen, i) in genres" :key="i">{{ gen }} <button type="button" @click="handleDeleteGenre(gen)"
+              class="btn genre-delete">x</button></li>
+        </ul>
+      </Field>
+      <button class="btn create" v-bind="meta.valid" type="submit">Create</button>
+    </Form>
+  </main>
 </template>
 
-<style></style>
+<style scoped>
+.quote-form {
+  min-height: calc(100vh / 1.5);
+  background-color: #fff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+
+  padding: 40px 20px;
+}
+
+.field {
+  width: 100%;
+  max-width: 600px;
+  height: 60px;
+  border: 2px dashed darkcyan;
+  font-size: 18px;
+  padding: 20px 15px;
+
+  border-radius: 10px;
+
+  transition: .3s;
+}
+
+.quote {
+  height: 120px;
+  resize: none;
+}
+
+.btn {
+  border-radius: 10px;
+  padding: 0 15px;
+
+  color: #fff;
+  background-color: darkcyan;
+}
+
+.field:focus {
+  outline: none;
+  border: 2px dashed rgb(113, 139, 0);
+}
+
+.genre-inp {
+  flex-grow: 1;
+}
+
+.genre-field {
+  width: 100%;
+  height: 60px;
+  max-width: 600px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.genre-btn {
+  height: 100%;
+
+  padding: 0 15px;
+  border-radius: 10px;
+
+  background-color: darkcyan;
+  color: #fff;
+
+  font-size: 20px;
+}
+
+.genre-list {
+  list-style: none;
+
+  width: 100%;
+  max-width: 600px;
+}
+
+.genre-list li {
+  display: flex;
+  justify-content: space-between;
+
+  padding-top: 10px;
+
+  font-weight: bolder;
+}
+
+.create {
+  padding: 10px 15px;
+  font-size: 20px;
+}
+
+
+.error {
+  color: red;
+}
+</style>

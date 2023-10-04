@@ -1,9 +1,14 @@
 import instance from './instance'
 
 const api = {
-  createQuote() {},
+  createQuote(quote) {
+    return instance.post('/quotes/', quote).then((res) => res)
+
+  },
   getQuoteById() {},
-  getAllQuotes() {},
+  getAllQuotes() {
+    return instance.get('/quotes/').then((res) => res)
+  },
   updateQuote() {},
   deleteQuote() {}
 }
