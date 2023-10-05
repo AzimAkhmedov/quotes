@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { CreateQuoteView, QuotesView } from '../views'
+import { CreateQuoteView, QuoteDetailsView, QuotesView } from '../views'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -13,6 +13,10 @@ const router = createRouter({
       path: '/create',
       name: 'create',
       component: CreateQuoteView
+    },
+    {
+      path: '/:id',
+      component: QuoteDetailsView
     }
   ]
 })

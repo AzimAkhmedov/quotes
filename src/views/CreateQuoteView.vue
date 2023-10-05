@@ -1,20 +1,19 @@
 <script setup>
 import { useForm, Field, Form } from 'vee-validate'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import api from '../api';
 
-const { defineInputBinds, values, setFieldValue, meta, validate } = useForm({
+const { defineInputBinds, values, handleReset } = useForm({
   initialValues: {
     author: '',
     quote: '',
-    genre: ""
   },
 })
 
 const author = defineInputBinds('author')
 const quote = defineInputBinds('quote')
-const genre = defineInputBinds('genre')
 
+const genre = ref('')
 const genres = ref([])
 
 const validateQuote = (quote) => !(quote.length && quote.trim().length) ? "Quote is required" : true
@@ -34,21 +33,23 @@ const validateGenreName = () => {
   return true
 }
 const handleAddGenre = () => {
-  if (genre.value.value.length === 0) {
+  if (genre.value.length === 0) {
     alert('You need to fill genre name')
     return;
   }
-  if (genres.value.find((e) => e === genre.value.value)) {
+  if (genres.value.find((e) => e === genre.value)) {
     alert('You already wrote such tag')
     return;
   }
 
-  genres.value.push(genre.value.value)
-  setFieldValue('genre', '')
+  genres.value.push(genre.value)
+  genre.value = ''
 }
+
 const handleDeleteGenre = (genre) => {
   genres.value = genres.value.filter(e => e !== genre)
 }
+
 const onSubmit = (e) => {
   const time = new Date().toLocaleString()
 
@@ -60,7 +61,12 @@ const onSubmit = (e) => {
   }).then(res => {
     if (res.statusText == 'Created') {
       alert("Your quote has been created! Go to home page and find it")
+      handleReset()
+      genres.value = []
     }
+  }).catch((err) => {
+    alert("Unknown error")
+    console.log(err);
   })
 }
 </script>
@@ -69,17 +75,17 @@ const onSubmit = (e) => {
     <Form name="createQuote" :on-submit="onSubmit" class="quote-form">
       <h2 class="title">Here you can create any quote!</h2>
       <Field name="quote" v-slot="{ field, errorMessage }" :rules="validateQuote" type="text" v-bind="quote">
-        <textarea class="field quote" required placeholder="Your quote" type="text" v-bind="field" name="quote" />
+        <textarea class="field quote" required placeholder="Your quote" type="text" v-bind="field" :value="quote.value" name="quote" />
         <p class="error">{{ errorMessage }}</p>
       </Field>
       <Field name="author" v-slot="{ field, errorMessage }" :rules="validateAuthorName" type="text" v-bind="author">
-        <input class="field" placeholder="Name of author" type="text" v-bind="field" name="author" />
+        <input class="field" placeholder="Name of author" type="text" v-bind="field" :value="author.value" name="author" />
         <p class="error">{{ errorMessage }}</p>
       </Field>
-      <Field name="genre" v-slot="{ field, errorMessage }" :rules="validateGenreName" type="text" v-bind="genre">
+      <Field name="genre" v-slot="{ field }" :rules="validateGenreName" type="text">
         <div class="genre-field">
-          <input class="field genre-inp" :value="genre.value" placeholder="Genre" @keyup.enter="handleAddGenre"
-            type="text" v-bind="field" name="genre" />
+          <input class="field genre-inp" v-model="genre" placeholder="Genre" @keyup.enter="handleAddGenre" type="text"
+            name="genre" />
           <button type="button" class="btn genre-btn" @click="handleAddGenre">Click to add Genre</button>
         </div>
         <ul class="genre-list">
@@ -87,7 +93,8 @@ const onSubmit = (e) => {
               class="btn genre-delete">x</button></li>
         </ul>
       </Field>
-      <button class="btn create" v-bind="meta.valid" type="submit">Create</button>
+      <button class="btn create" type="submit">Create</button>
+
     </Form>
   </main>
 </template>

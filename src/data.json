@@ -1,72 +1,28 @@
 {
   "quotes": [
     {
-      "author": "ADASDASD",
-      "quote": "ASDASDASDASD",
+      "author": "Master Oogway",
+      "quote": "When the path you walk always leads back to yourself, you never get anywhere.",
       "genre": "",
-      "createdAt": "05.10.2023, 02:44:47",
-      "lastEdited": "05.10.2023, 02:44:47",
+      "createdAt": "05.10.2023, 08:30:40",
+      "lastEdited": "05.10.2023, 08:30:40",
       "genres": [
-        "123ASD",
-        "123ASDASDASD"
-      ],
-      "id": 1
-    },
-    {
-      "author": "asdad",
-      "quote": "asd",
-      "genre": "",
-      "createdAt": "05.10.2023, 02:46:30",
-      "lastEdited": "05.10.2023, 02:46:30",
-      "genres": [
-        "adasd"
-      ],
-      "id": 2
-    },
-    {
-      "author": "sss",
-      "quote": "sss",
-      "genre": "",
-      "createdAt": "05.10.2023, 03:13:53",
-      "lastEdited": "05.10.2023, 03:13:53",
-      "genres": [
-        "ssss"
-      ],
-      "id": 3
-    },
-    {
-      "author": "aaa",
-      "quote": "aaa",
-      "genre": "",
-      "createdAt": "05.10.2023, 03:14:20",
-      "lastEdited": "05.10.2023, 03:14:20",
-      "genres": [
-        "aaaa"
-      ],
-      "id": 4
-    },
-    {
-      "author": "asdasd",
-      "quote": "asdasdasd",
-      "genre": "",
-      "createdAt": "05.10.2023, 03:43:45",
-      "lastEdited": "05.10.2023, 03:43:45",
-      "genres": [
-        "asdasd"
-      ],
-      "id": 5
-    },
-    {
-      "author": "Oogway Master",
-      "quote": "You are to concermed with what was and what will be.Here is a saying. Yesterday is history, Tomorrow is a mystery, but today is a gift. That is why it is called the present.",
-      "genre": "",
-      "createdAt": "05.10.2023, 03:47:40",
-      "lastEdited": "05.10.2023, 03:47:40",
-      "genres": [
-        "Fantasy",
         "Kung-fu"
       ],
-      "id": 6
+      "id": 9
+    },
+    {
+      "author": "Master Oogway",
+      "quote": "You are too concermed with what was and what will be. Here is the saying. Yesterday is history, Tomorrow is a mystery, but today is a gift. That is why it is called the present",
+      "createdAt": "05.10.2023, 10:19:41",
+      "lastEdited": "05.10.2023, 12:33:00",
+      "genres": [
+        "Kung-fu panda",
+        "Oogway",
+        "Dreamworks",
+        "Cartoon"
+      ],
+      "id": 17
     }
   ]
 }

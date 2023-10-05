@@ -1,5 +1,6 @@
 <script setup>
 import { defineProps } from 'vue'
+// import {} from 'vue-router'
 defineProps({
     quote: {
         required: true,
@@ -30,12 +31,52 @@ defineProps({
 
 <template>
     <div class="card">
-        <h3>
+        <h3 class="quote">
             {{ quote }}
         </h3>
-        <p>{{ author }}</p>
+        <p class="author">{{ author }}</p>
+
+        <span class="created">Created:{{ createdAt }}</span>
+        <span class="edited">Edited:{{ lastEdited }}</span>
     </div>
 </template>
 
 
-<style scoped></style>
+<style scoped>
+.card {
+    background-color: #fff;
+
+    min-height: 300px;
+    width: 300px;
+
+    border-radius: 10px;
+    border: 2px solid darkcyan;
+
+    padding: 10px 20px;
+
+    position: relative;
+}
+
+.author {
+    text-align-last: right;
+    font-size: 17px;
+
+    padding-top: 10px;
+}
+
+.created {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+
+    font-size: 10px;
+}
+
+.edited {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+
+    font-size: 10px;
+}
+</style>
