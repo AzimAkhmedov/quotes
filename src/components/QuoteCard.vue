@@ -1,82 +1,79 @@
 <script setup>
 import { defineProps } from 'vue'
-// import {} from 'vue-router'
 defineProps({
-    quote: {
-        required: true,
-        type: String,
-    },
-    author: {
-        required: true,
-        type: String,
-    },
-    genres: {
-        required: true,
-        type: Array,
-    },
-    createdAt: {
-        required: true,
-        type: String,
-    },
-    lastEdited: {
-        required: true,
-        type: String,
-    },
-    id: {
-        required: true,
-        type: Number,
-    }
+  quote: {
+    required: true,
+    type: String
+  },
+  author: {
+    required: true,
+    type: String
+  },
+  genres: {
+    required: true,
+    type: Array
+  },
+  createdAt: {
+    required: true,
+    type: String
+  },
+  lastEdited: {
+    required: true,
+    type: String
+  },
+  id: {
+    required: true,
+    type: Number
+  }
 })
 </script>
 
 <template>
-    <div class="card">
-        <h3 class="quote">
-            {{ quote }}
-        </h3>
-        <p class="author">{{ author }}</p>
-
-        <span class="created">Created:{{ createdAt }}</span>
-        <span class="edited">Edited:{{ lastEdited }}</span>
-    </div>
+  <div class="card">
+    <h3 class="quote">
+      {{ quote }}
+    </h3>
+    <p class="author">{{ author }}</p>
+    <span class="created">Created:{{ createdAt }}</span>
+    <span class="edited">Edited:{{ lastEdited }}</span>
+  </div>
 </template>
-
 
 <style scoped>
 .card {
-    background-color: #fff;
+  background-color: #fff;
 
-    min-height: 300px;
-    width: 300px;
+  min-height: 300px;
+  width: 300px;
 
-    border-radius: 10px;
-    border: 2px solid darkcyan;
+  border-radius: 10px;
+  border: 2px solid darkcyan;
 
-    padding: 10px 20px;
+  padding: 10px 20px;
 
-    position: relative;
+  position: relative;
 }
 
 .author {
-    text-align-last: right;
-    font-size: 17px;
+  text-align-last: right;
+  font-size: 17px;
 
-    padding-top: 10px;
+  padding-top: 10px;
 }
 
 .created {
-    position: absolute;
-    bottom: 5px;
-    left: 5px;
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
 
-    font-size: 10px;
+  font-size: 10px;
 }
 
 .edited {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
 
-    font-size: 10px;
+  font-size: 10px;
 }
 </style>
