@@ -1,8 +1,9 @@
 <script setup>
 import { useForm, Field, Form } from 'vee-validate'
-import { ref, watch } from 'vue'
-import api from '../api'
+import { ref } from 'vue'
+import { useStore } from 'vuex';
 
+const store = useStore()
 const { defineInputBinds, values, handleReset } = useForm({
   initialValues: {
     author: '',
@@ -30,7 +31,7 @@ const validateAuthorName = (name) => {
 }
 
 const validateGenreName = () => {
-  if (!genres.value.length) {
+  if (genres.value.length === 0) {
     return 'Tag at least 1 genre'
   }
   return true
@@ -54,81 +55,48 @@ const handleDeleteGenre = (genre) => {
   genres.value = genres.value.filter((e) => e !== genre)
 }
 
-const onSubmit = (e) => {
+const onSubmit = () => {
   const time = new Date().toLocaleString()
-  api
-    .createQuote({
-      ...values,
-      createdAt: time,
-      lastEdited: time,
-      genres: genres.value
-    })
-    .then((res) => {
-      if (res.statusText == 'Created') {
-        alert('Your quote has been created! Go to home page and find it')
-        handleReset()
-        genres.value = []
-      }
-    })
+  const newQuote = {
+    ...values,
+    id: Date.now(),
+    createdAt: time,
+    lastEdited: time,
+    genres: genres.value
+  }
+
+  store.dispatch('createQuote', newQuote).then((res) => {
+    alert('Your quote has been created! Go to home page and find it')
+    handleReset()
+    genres.value = []
+  })
     .catch((err) => {
       alert('Unknown error')
-      console.log(err)
     })
 }
-
 </script>
 <template>
   <main class="container">
     <Form name="createQuote" :on-submit="onSubmit" class="quote-form">
       <h2 class="title">Here you can create any quote!</h2>
-      <Field
-        name="quote"
-        v-slot="{ field, errorMessage }"
-        :rules="validateQuote"
-        type="text"
-        v-bind="quote"
-      >
-        <textarea
-          class="field quote"
-          required
-          placeholder="Your quote"
-          type="text"
-          v-bind="field"
-          :value="quote.value"
-          name="quote"
-        />
+      <Field name="quote" v-slot="{ field, errorMessage }" :rules="validateQuote" type="text" v-bind="quote">
+        <textarea class="field quote" required placeholder="Your quote" type="text" v-bind="field" :value="quote.value"
+          name="quote" />
         <p class="error">{{ errorMessage }}</p>
       </Field>
-      <Field
-        name="author"
-        v-slot="{ field, errorMessage }"
-        :rules="validateAuthorName"
-        type="text"
-        v-bind="author"
-      >
-        <input
-          class="field"
-          placeholder="Name of author"
-          type="text"
-          v-bind="field"
-          :value="author.value"
-          name="author"
-        />
+      <Field name="author" v-slot="{ field, errorMessage }" :rules="validateAuthorName" type="text" v-bind="author">
+        <input class="field" placeholder="Name of author" type="text" v-bind="field" :value="author.value"
+          name="author" />
         <p class="error">{{ errorMessage }}</p>
       </Field>
-      <Field name="genre" v-slot="{ field }" :rules="validateGenreName" type="text">
+      <Field name="genre" v-slot="{ field, errorMessage }" :rules="validateGenreName" type="text">
         <div class="genre-field">
-          <input
-            class="field genre-inp"
-            v-model="genre"
-            placeholder="Genre"
-            @keyup.enter="handleAddGenre"
-            type="text"
-            name="genre"
-          />
+          <input class="field genre-inp" v-model="genre" placeholder="Genre" @keyup.enter="handleAddGenre" type="text"
+            name="genre" />
           <button type="button" class="btn genre-btn" @click="handleAddGenre">
             Click to add Genre
           </button>
+          <p class="error">{{ errorMessage }}</p>
         </div>
         <ul class="genre-list">
           <li v-for="(gen, i) in genres" :key="i">
