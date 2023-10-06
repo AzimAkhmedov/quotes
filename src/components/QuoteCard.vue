@@ -29,9 +29,11 @@ defineProps({
 
 <template>
   <div class="card">
-    <h3 class="quote">
-      {{ quote }}
-    </h3>
+    <div class="quote-wrapper">
+      <h3 class="quote">
+        {{ quote }}
+      </h3>
+    </div>
     <p class="author">{{ author }}</p>
     <span class="created">Created:{{ createdAt }}</span>
     <span class="edited">Edited:{{ lastEdited }}</span>
@@ -40,13 +42,13 @@ defineProps({
 
 <style scoped>
 .card {
-  background-color: #fff;
+  background-color: var(--secondary);
 
   min-height: 300px;
   width: 300px;
 
   border-radius: 10px;
-  border: 2px solid darkcyan;
+  border: 2px solid var(--green);
 
   padding: 10px 20px;
 
@@ -56,9 +58,23 @@ defineProps({
 .author {
   text-align-last: right;
   font-size: 17px;
+  font-style: italic;
+  font-weight: 200;
+  letter-spacing: 1px;
 
   padding-top: 10px;
+  margin-bottom: 20px;
+
 }
+
+.quote-wrapper {
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis
+}
+
 
 .created {
   position: absolute;
@@ -78,7 +94,6 @@ defineProps({
 
 @media (max-width:420px) {
   .card {
-    border: 1px solid darkcyan;
     width: 100vw;
   }
 
@@ -89,7 +104,6 @@ defineProps({
   .author {
     font-size: 14px;
   }
-
   .created,
   .edited {
     max-width: 100px;

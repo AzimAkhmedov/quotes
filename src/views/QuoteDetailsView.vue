@@ -78,15 +78,15 @@ onMounted(() => {
     <div v-else class="wrapper">
       <h3>Editing Quote</h3>
       <form name="editQuote" @submit.prevent @submit="onSubmit">
-        <div class="field">
-          <input v-model="editedQuote.quote" required type="text" name="quote" />
+        <div class="quote-field">
+          <textarea class="quote-input" v-model="editedQuote.quote" required type="text" name="quote" />
         </div>
         <div class="field">
           <input v-model="editedQuote.author" required type="text" name="author" />
         </div>
         <div class="add-tag">
-          <input class="genre" v-model="genre" type="text" name="genre" />
-          <button class="btn" type="button" @click="handleAddTag">Add tags</button>
+          <input placeholder="Genre" class="genre" v-model="genre" type="text" name="genre" />
+          <button class="btn" type="button" @click="handleAddTag">Add genre</button>
         </div>
         <ul class="tags">
           <li class="tag editing" v-for="(tag, i) in editedQuote.genres" :key="i" @click="handleDeleteGenre(tag)">
@@ -104,61 +104,11 @@ onMounted(() => {
 
 <style scoped>
 .wrapper {
-  background-color: #fff;
 
   padding: 20px 40px 200px 40px;
   min-height: calc(100vh / 2);
 
   position: relative;
-}
-
-form {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  height: 100%;
-}
-
-input {
-  border: 2px dashed darkcyan;
-
-  font-size: 18px;
-  padding: 20px 15px;
-
-  border-radius: 10px;
-
-  width: 100%;
-  max-width: 600px;
-  height: 60px;
-}
-
-input:focus {
-  outline: none;
-  border: 2px dashed rgb(113, 139, 0);
-}
-
-.field {
-  width: 100%;
-  height: 60px;
-  max-width: 600px;
-}
-
-.add-tag {
-  width: 100%;
-  max-width: 600px;
-
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.add-tag .btn {
-  border-radius: 10px;
-}
-
-.genre {
-  flex-grow: 1;
 }
 
 .quote {
@@ -168,6 +118,11 @@ input:focus {
 .author {
   text-align: right;
   font-size: 20px;
+  font-style: italic;
+  font-weight: 200;
+  letter-spacing: 1px;
+
+  margin-bottom: 100px;
 }
 
 .tags-title {
@@ -186,7 +141,7 @@ input:focus {
 }
 
 .tag {
-  border: 2px dashed darkcyan;
+  border: 2px dashed var(--green);
   padding: 5px 10px;
 }
 
@@ -198,8 +153,8 @@ input:focus {
 
 .btn {
   padding: 10px 30px;
-  background-color: darkcyan;
-  color: #fff;
+  background-color: var(--green);
+  color: var(--typografy);
   font-size: 18px;
   font-weight: bold;
 }
@@ -223,5 +178,101 @@ input:focus {
 
 .editing {
   border-color: red;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+}
+
+input {
+  border: 2px dashed var(--green);
+
+  font-size: 18px;
+  padding: 20px 15px;
+
+  border-radius: 10px;
+
+  width: 100%;
+  max-width: 600px;
+  height: 60px;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border: 2px dashed rgb(113, 139, 0);
+}
+
+.field {
+  width: 100%;
+  height: 60px;
+  max-width: 600px;
+}
+
+.quote-field {
+  width: 100%;
+  max-width: 600px;
+}
+
+.quote-input {
+  width: 100%;
+  height: 120px;
+
+  resize: none;
+  border: 2px dashed var(--green);
+
+  font-size: 18px;
+  padding: 20px 15px;
+
+  border-radius: 10px;
+
+}
+
+.add-tag {
+  width: 100%;
+  max-width: 600px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.add-tag .btn {
+  border-radius: 10px;
+}
+
+.genre {
+  flex-grow: 1;
+}
+
+@media (max-width:600px) {
+  .quote {
+    font-size: 16px;
+  }
+
+  .author {
+    font-size: 16px;
+    margin-bottom: 40px;
+  }
+
+  .time:nth-child(3) {
+    bottom: 10px !important;
+  }
+
+  .add-tag {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+  }
+
+  .btn {
+    padding: 10px 15px;
+  }
+
+
 }
 </style>
