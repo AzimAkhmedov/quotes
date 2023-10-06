@@ -2,9 +2,9 @@
 import { ref, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
-import { Loader } from '../components';
+import { Loader } from '../components'
 import router from '../router'
-import api from '../api';
+import api from '../api'
 const route = useRoute()
 const store = useStore()
 const editMode = ref(false)
@@ -38,8 +38,8 @@ const handleAddTag = () => {
 }
 const onSubmit = (e) => {
   if (editedQuote.value.genres.length == 0) {
-    alert("Genres cant be empty")
-    return;
+    alert('Genres cant be empty')
+    return
   }
   const time = new Date().toLocaleString()
   const newQuote = { ...editedQuote.value, lastEdited: time }
@@ -49,7 +49,7 @@ const onSubmit = (e) => {
 
 onMounted(() => {
   store.dispatch('getCurrentQuote', route.params.id)
-  api.getQuoteById(route.params.id).then(res => {
+  api.getQuoteById(route.params.id).then((res) => {
     editedQuote.value = res.data
   })
 })
@@ -67,7 +67,9 @@ onMounted(() => {
       <p class="time">Last Changed: {{ store.getters.getCurrentQuote.lastEdited }}</p>
       <p class="tags-title">Quote Tags</p>
       <ul class="tags">
-        <li class="tag" v-for="(tag, i) in store.getters.getCurrentQuote.genres" :key="i">{{ tag }}</li>
+        <li class="tag" v-for="(tag, i) in store.getters.getCurrentQuote.genres" :key="i">
+          {{ tag }}
+        </li>
       </ul>
 
       <div class="actions">
@@ -79,7 +81,13 @@ onMounted(() => {
       <h3>Editing Quote</h3>
       <form name="editQuote" @submit.prevent @submit="onSubmit">
         <div class="quote-field">
-          <textarea class="quote-input" v-model="editedQuote.quote" required type="text" name="quote" />
+          <textarea
+            class="quote-input"
+            v-model="editedQuote.quote"
+            required
+            type="text"
+            name="quote"
+          />
         </div>
         <div class="field">
           <input v-model="editedQuote.author" required type="text" name="author" />
@@ -89,7 +97,12 @@ onMounted(() => {
           <button class="btn" type="button" @click="handleAddTag">Add genre</button>
         </div>
         <ul class="tags">
-          <li class="tag editing" v-for="(tag, i) in editedQuote.genres" :key="i" @click="handleDeleteGenre(tag)">
+          <li
+            class="tag editing"
+            v-for="(tag, i) in editedQuote.genres"
+            :key="i"
+            @click="handleDeleteGenre(tag)"
+          >
             {{ tag }} x
           </li>
         </ul>
@@ -104,7 +117,6 @@ onMounted(() => {
 
 <style scoped>
 .wrapper {
-
   padding: 20px 40px 200px 40px;
   min-height: calc(100vh / 2);
 
@@ -229,7 +241,6 @@ textarea:focus {
   padding: 20px 15px;
 
   border-radius: 10px;
-
 }
 
 .add-tag {
@@ -249,7 +260,7 @@ textarea:focus {
   flex-grow: 1;
 }
 
-@media (max-width:600px) {
+@media (max-width: 600px) {
   .quote {
     font-size: 16px;
   }
@@ -272,7 +283,5 @@ textarea:focus {
   .btn {
     padding: 10px 15px;
   }
-
-
 }
 </style>

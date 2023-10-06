@@ -64,7 +64,6 @@ defineProps({
 
   padding-top: 10px;
   margin-bottom: 20px;
-
 }
 
 .quote-wrapper {
@@ -72,9 +71,8 @@ defineProps({
   -webkit-line-clamp: 6;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis
+  text-overflow: ellipsis;
 }
-
 
 .created {
   position: absolute;
@@ -92,7 +90,7 @@ defineProps({
   font-size: 10px;
 }
 
-@media (max-width:420px) {
+@media (max-width: 420px) {
   .card {
     width: 100vw;
   }

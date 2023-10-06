@@ -1,7 +1,7 @@
 <script setup>
 import { useForm, Field, Form } from 'vee-validate'
 import { ref } from 'vue'
-import { useStore } from 'vuex';
+import { useStore } from 'vuex'
 
 const store = useStore()
 const { defineInputBinds, values, handleReset } = useForm({
@@ -30,7 +30,7 @@ const validateAuthorName = (name) => {
   if (name.match(/^[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/)) {
     return 'You are not allowed to place symbols'
   }
-  if (name.match(/[\wа-я]+/ig) || name.match(/[^a-zA-Z]+/)) {
+  if (name.match(/[\wа-я]+/gi) || name.match(/[^a-zA-Z]+/)) {
     return true
   }
   return 'Use only russian or english letters'
@@ -75,11 +75,13 @@ const onSubmit = () => {
     genres: genres.value
   }
 
-  store.dispatch('createQuote', newQuote).then((res) => {
-    alert('Your quote has been created! Go to home page and find it')
-    handleReset()
-    genres.value = []
-  })
+  store
+    .dispatch('createQuote', newQuote)
+    .then((res) => {
+      alert('Your quote has been created! Go to home page and find it')
+      handleReset()
+      genres.value = []
+    })
     .catch((err) => {
       alert('Unknown error')
     })
@@ -89,20 +91,51 @@ const onSubmit = () => {
   <main class="container">
     <Form name="createQuote" :on-submit="onSubmit" class="quote-form">
       <h2 class="title">Here you can create any quote!</h2>
-      <Field name="quote" v-slot="{ field, errorMessage }" :rules="validateQuote" type="text" v-bind="quote">
-        <textarea class="field quote" required placeholder="Your quote" type="text" v-bind="field" :value="quote.value"
-          name="quote" />
+      <Field
+        name="quote"
+        v-slot="{ field, errorMessage }"
+        :rules="validateQuote"
+        type="text"
+        v-bind="quote"
+      >
+        <textarea
+          class="field quote"
+          required
+          placeholder="Your quote"
+          type="text"
+          v-bind="field"
+          :value="quote.value"
+          name="quote"
+        />
         <p class="error">{{ errorMessage }}</p>
       </Field>
-      <Field name="author" v-slot="{ field, errorMessage }" :rules="validateAuthorName" type="text" v-bind="author">
-        <input class="field" placeholder="Name of author" type="text" v-bind="field" :value="author.value"
-          name="author" />
+      <Field
+        name="author"
+        v-slot="{ field, errorMessage }"
+        :rules="validateAuthorName"
+        type="text"
+        v-bind="author"
+      >
+        <input
+          class="field"
+          placeholder="Name of author"
+          type="text"
+          v-bind="field"
+          :value="author.value"
+          name="author"
+        />
         <p class="error">{{ errorMessage }}</p>
       </Field>
       <Field name="genre" v-slot="{ field, errorMessage }" :rules="validateGenreName" type="text">
         <div class="genre-field">
-          <input class="field genre-inp" v-model="genre" placeholder="Genre" @keyup.enter="handleAddGenre" type="text"
-            name="genre" />
+          <input
+            class="field genre-inp"
+            v-model="genre"
+            placeholder="Genre"
+            @keyup.enter="handleAddGenre"
+            type="text"
+            name="genre"
+          />
           <button type="button" class="btn genre-btn" @click="handleAddGenre">
             Click to add Genre
           </button>
@@ -212,7 +245,7 @@ const onSubmit = () => {
   color: red;
 }
 
-@media (max-width:600px) {
+@media (max-width: 600px) {
   .genre-btn {
     padding: 5px 10px;
     font-size: 12px;
