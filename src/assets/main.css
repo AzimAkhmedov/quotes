@@ -5,7 +5,12 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+:root {
+  --main: #111827;
+  --secondary: #1f2937;
+  --green: #008b8b;
+  --typografy: #fff;
+}
 a {
   color: inherit;
   text-decoration: none;
@@ -13,7 +18,7 @@ a {
 
 body {
   font-family: Roboto;
-  background-color: #ebe8e8;
+  background-color: var(--main);
 }
 
 button {
@@ -23,7 +28,8 @@ button {
 }
 
 main {
-  padding: 40px 0 0 0;
+  padding: 40px 0 0 0 !important;
+  color: var(--typografy);
 }
 
 .container {

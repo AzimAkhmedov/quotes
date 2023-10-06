@@ -15,10 +15,11 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <style>
 header {
-  border: 2px dashed darkcyan;
+  border: 2px dashed var(--green);
   padding: 20px 0;
 
-  background-color: #fff;
+  color: var(--typografy);
+  background-color: var(--secondary);
 }
 
 nav {

@@ -125,7 +125,6 @@ const onSubmit = () => {
 <style scoped>
 .quote-form {
   min-height: calc(100vh / 1.5);
-  background-color: #fff;
 
   display: flex;
   align-items: center;
@@ -140,7 +139,7 @@ const onSubmit = () => {
   width: 100%;
   max-width: 600px;
   height: 60px;
-  border: 2px dashed darkcyan;
+
   font-size: 18px;
   padding: 20px 15px;
 
@@ -158,13 +157,13 @@ const onSubmit = () => {
   border-radius: 10px;
   padding: 0 15px;
 
-  color: #fff;
-  background-color: darkcyan;
+  color: var(--typografy);
+  background-color: var(--green);
 }
 
 .field:focus {
   outline: none;
-  border: 2px dashed rgb(113, 139, 0);
+  border: 1px solid var(--green);
 }
 
 .genre-inp {
@@ -183,12 +182,7 @@ const onSubmit = () => {
 
 .genre-btn {
   height: 100%;
-
   padding: 0 15px;
-  border-radius: 10px;
-
-  background-color: darkcyan;
-  color: #fff;
 
   font-size: 20px;
 }
@@ -216,5 +210,12 @@ const onSubmit = () => {
 
 .error {
   color: red;
+}
+
+@media (max-width:600px) {
+  .genre-btn {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
 }
 </style>
