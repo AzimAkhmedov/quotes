@@ -1,15 +1,17 @@
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 import { Loader } from '../components'
+import { useToast } from "vue-toastification";
+
 import router from '../router'
 import api from '../api'
 const route = useRoute()
 const store = useStore()
+const toast = useToast()
 const editMode = ref(false)
 const genre = ref('')
-
 const editedQuote = ref({
   author: '',
   quote: '',
@@ -21,6 +23,7 @@ const editedQuote = ref({
 const handleDelete = () => {
   if (window.confirm('Are you sure to delete?')) {
     store.dispatch('deleteQuote', route.params.id).then(() => {
+      toast('Deleted!', { position: 'top-right', type: "success" })
       router.back()
     })
   }
@@ -29,18 +32,31 @@ const handleDeleteGenre = (gen) => {
   editedQuote.value.genres = editedQuote.value.genres.filter((e) => e !== gen)
 }
 const handleAddTag = () => {
+  if (genre.value.match(/(\d+)/)) {
+    toast('Name of genre cant consist of numbers', { position: 'top-right', type: "error" })
+    return
+  }
+  if (editedQuote.value.genres.find((e) => e === genre.value)) {
+    toast('You already have such tag', { position: 'top-right', type: "error" })
+    return
+  }
   if (genre.value && genre.value.trim()) {
     editedQuote.value.genres.push(genre.value)
     genre.value = ''
   } else {
-    alert('Name your genre')
+    toast('Name your genre', { position: 'top-right', type: "error" })
   }
 }
 const onSubmit = (e) => {
   if (editedQuote.value.genres.length == 0) {
-    alert('Genres cant be empty')
+    toast('Your quote must have at leat 1 genre', { position: 'top-right', type: "error" })
+    return;
+  }
+  if (editedQuote.value.author.match(/(\d+)/)) {
+    toast('Name of author cant consist of numbers', { position: 'top-right', type: "error" })
     return
   }
+
   const time = new Date().toLocaleString()
   const newQuote = { ...editedQuote.value, lastEdited: time }
   store.dispatch('updateQuote', { ...newQuote, id: route.params.id })
@@ -81,13 +97,7 @@ onMounted(() => {
       <h3>Editing Quote</h3>
       <form name="editQuote" @submit.prevent @submit="onSubmit">
         <div class="quote-field">
-          <textarea
-            class="quote-input"
-            v-model="editedQuote.quote"
-            required
-            type="text"
-            name="quote"
-          />
+          <textarea class="quote-input" v-model="editedQuote.quote" required type="text" name="quote" />
         </div>
         <div class="field">
           <input v-model="editedQuote.author" required type="text" name="author" />
@@ -97,12 +107,7 @@ onMounted(() => {
           <button class="btn" type="button" @click="handleAddTag">Add genre</button>
         </div>
         <ul class="tags">
-          <li
-            class="tag editing"
-            v-for="(tag, i) in editedQuote.genres"
-            :key="i"
-            @click="handleDeleteGenre(tag)"
-          >
+          <li class="tag editing" v-for="(tag, i) in editedQuote.genres" :key="i" @click="handleDeleteGenre(tag)">
             {{ tag }} x
           </li>
         </ul>
