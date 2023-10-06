@@ -3,7 +3,7 @@
 ## Project Setup
 
 ###  You need to clone this repository
- Glone it using Github Desctop or Git
+ Сlone it using Github Desctop or Git
 ```sh
 git clone <url>
 ```
