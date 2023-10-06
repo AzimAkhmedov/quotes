@@ -1,24 +1,39 @@
-# package.json
-
-This template should help get you started developing with Vue 3 in Vite.
+# Quotes Manager
 
 ## Project Setup
+
+###  You need to clone this repository
+ Glone it using Github Desctop or Git
+```sh
+git clone <url>
+```
+
+### Installing Dependencies
 
 ```sh
 npm install
 ```
 
-### Run
+**_NOTE:_**  You need to install json-server package globaly.
+```sh
+npm install -g json-server
+```
+
+
+## How to run
+
+
+### Run Command
 
 ```sh
 npm run dev
 ```
-
-### Compile and Hot-Reload for Development
+### Run Database
 
 ```sh
-npm run dev
+npm run server
 ```
+<p>Then go to the<a href='http://localhost:8080'>http://localhost:8080</a></p>
 
 ### Compile and Minify for Production
 
@@ -44,4 +59,3 @@ npm run format
 npm run server
 ```
 
-<p>Then go to the<a href='http://localhost:8080'>http://localhost:8080</a></p>
