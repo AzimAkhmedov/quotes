@@ -16,6 +16,9 @@ onMounted(() => {
     <div v-if="root.state.quotesLoading">
       <Loader />
     </div>
+    <div v-else-if="root.state.quotesError">
+   {{  root.state.quotesError}}
+    </div>
     <div v-else class="container">
       <h2 class="title">Quotes for you</h2>
       <div class="search-field">

@@ -75,4 +75,25 @@ defineProps({
 
   font-size: 10px;
 }
+
+@media (max-width:420px) {
+  .card {
+    border: 1px solid darkcyan;
+    width: 100vw;
+  }
+
+  .quote {
+    font-size: 14px;
+  }
+
+  .author {
+    font-size: 14px;
+  }
+
+  .created,
+  .edited {
+    max-width: 100px;
+    text-wrap: wrap;
+  }
+}
 </style>
