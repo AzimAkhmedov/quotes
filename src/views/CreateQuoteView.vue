@@ -2,7 +2,7 @@
 import { useForm, Field, Form } from 'vee-validate'
 import { ref } from 'vue'
 import { useStore } from 'vuex'
-import { useToast } from "vue-toastification";
+import { useToast } from 'vue-toastification'
 
 const store = useStore()
 const toast = useToast()
@@ -44,15 +44,15 @@ const validateGenreName = () => {
 
 const handleAddGenre = () => {
   if (genre.value.length === 0) {
-    toast('Name of genre cant be empty', { position: 'top-right', type: "error" })
+    toast('Name of genre cant be empty', { position: 'top-right', type: 'error' })
     return
   }
   if (genre.value.match(/(\d+)/)) {
-    toast('Name of genre cant consist of numbers', { position: 'top-right', type: "error" })
+    toast('Name of genre cant consist of numbers', { position: 'top-right', type: 'error' })
     return
   }
   if (genres.value.find((e) => e === genre.value)) {
-    toast('You already have such tag', { position: 'top-right', type: "error" })
+    toast('You already have such tag', { position: 'top-right', type: 'error' })
     return
   }
 
@@ -77,12 +77,12 @@ const onSubmit = () => {
   store
     .dispatch('createQuote', newQuote)
     .then((res) => {
-      toast('Quote created!', { position: 'top-right', type: "success" })
+      toast('Quote created!', { position: 'top-right', type: 'success' })
       handleReset()
       genres.value = []
     })
     .catch((err) => {
-      toast('Error ' + err, { position: 'top-right', type: "error" })
+      toast('Error ' + err, { position: 'top-right', type: 'error' })
     })
 }
 </script>
@@ -90,20 +90,51 @@ const onSubmit = () => {
   <main class="container">
     <Form name="createQuote" :on-submit="onSubmit" class="quote-form">
       <h2 class="title">Here you can create any quote!</h2>
-      <Field name="quote" v-slot="{ field, errorMessage }" :rules="validateQuote" type="text" v-bind="quote">
-        <textarea class="field quote" required placeholder="Your quote" type="text" v-bind="field" :value="quote.value"
-          name="quote" />
+      <Field
+        name="quote"
+        v-slot="{ field, errorMessage }"
+        :rules="validateQuote"
+        type="text"
+        v-bind="quote"
+      >
+        <textarea
+          class="field quote"
+          required
+          placeholder="Your quote"
+          type="text"
+          v-bind="field"
+          :value="quote.value"
+          name="quote"
+        />
         <p class="error">{{ errorMessage }}</p>
       </Field>
-      <Field name="author" v-slot="{ field, errorMessage }" :rules="validateAuthorName" type="text" v-bind="author">
-        <input class="field" placeholder="Name of author" type="text" v-bind="field" :value="author.value"
-          name="author" />
+      <Field
+        name="author"
+        v-slot="{ field, errorMessage }"
+        :rules="validateAuthorName"
+        type="text"
+        v-bind="author"
+      >
+        <input
+          class="field"
+          placeholder="Name of author"
+          type="text"
+          v-bind="field"
+          :value="author.value"
+          name="author"
+        />
         <p class="error">{{ errorMessage }}</p>
       </Field>
       <Field name="genre" v-slot="{ field, errorMessage }" :rules="validateGenreName" type="text">
         <div class="genre-field">
-          <input class="field genre-inp" v-model="genre" placeholder="Genre" @keyup.enter="handleAddGenre" type="text"
-            name="genre" />
+          <input
+            class="field genre-inp"
+            v-model="genre"
+            placeholder="Genre"
+            @keyup.enter="handleAddGenre"
+            type="text"
+            name="genre"
+          />
           <button type="button" class="btn genre-btn" @click="handleAddGenre">
             Click to add Genre
           </button>

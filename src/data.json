@@ -1,53 +1,60 @@
 {
   "quotes": [
     {
-      "author": "Master Oogwayaa",
-      "quote": "NormalQuotesadasdadad",
-      "id": 1696512251240,
-      "createdAt": "05.10.2023, 18:24:11",
-      "lastEdited": "05.10.2023, 21:25:21",
-      "genres": [
-        "Aaaa"
-      ]
-    },
-    {
-      "author": "Oogway",
+      "author": "Oogwayaaa",
       "quote": "Spread love everywhere you go. Let no one ever come to you without leaving happier.",
       "id": 1696519860945,
       "createdAt": "05.10.2023, 20:31:00",
-      "lastEdited": "05.10.2023, 21:23:42",
-      "genres": [
-        "123",
-        "asdasdasd",
-        "asdasd"
-      ]
+      "lastEdited": "06.10.2023, 19:04:09",
+      "genres": ["asdasdasd", "asdasd", "asd", "asdd"]
     },
     {
-      "author": "Dr. Seuss",
-      "quote": "You have brains in your head. You have feet in your shoes. You can steer yourself any direction you choose",
-      "id": 1696520579404,
-      "createdAt": "05.10.2023, 20:42:59",
-      "lastEdited": "05.10.2023, 21:07:50",
-      "genres": [
-        "asdasd",
-        "123",
-        "1231",
-        "asdasdasdasd",
-        "asdasda"
-      ]
+      "author": "Azim Axmedov",
+      "quote": "It was quite awesome task! I hope my code is awesome too)",
+      "id": 1696584506831,
+      "createdAt": "06.10.2023, 14:28:26",
+      "lastEdited": "06.10.2023, 20:18:54",
+      "genres": ["Programmer", "Alif", "Task"]
     },
     {
-      "author": "Thomas A. Edison",
-      "quote": "Many of life's failures are people who did not realize how close they were to success when they gave up",
-      "id": 1696523173817,
-      "createdAt": "05.10.2023, 21:26:13",
-      "lastEdited": "05.10.2023, 21:26:13",
-      "genres": [
-        "Book",
-        "Science",
-        "Edison",
-        "Lamp"
-      ]
+      "author": "Master Shifu",
+      "quote": "Your story may not have such a happy beginning but that does not make you who you are, it is the rest of it- who you choose to be",
+      "id": 1696605449220,
+      "createdAt": "06.10.2023, 20:17:29",
+      "lastEdited": "06.10.2023, 20:17:29",
+      "genres": ["Cartoons"]
+    },
+    {
+      "author": "Master Oogway",
+      "quote": "Your mind is like this water, my friend. When it is agitated, it becomes difficult to see. But if you allow it to settle, the answer becomes clear",
+      "id": 1696605505769,
+      "createdAt": "06.10.2023, 20:18:25",
+      "lastEdited": "06.10.2023, 20:18:25",
+      "genres": ["Cartoons", "Kung-fu"]
+    },
+    {
+      "author": "Master Oogway",
+      "quote": "You are too concerned with what was and what will be. There’s a saying; Yesterday is history, tomorrow is a mystery, but today is a gift. That is why it is called the present",
+      "id": 1696605620775,
+      "createdAt": "06.10.2023, 20:20:20",
+      "lastEdited": "06.10.2023, 20:20:20",
+      "genres": ["Cartoons"]
+    },
+    {
+      "author": "Master Shifu",
+      "quote": "The measure of a real champion is not whether they can triumph, but whether they can overcome defeat",
+      "id": 1696605686918,
+      "createdAt": "06.10.2023, 20:21:26",
+      "lastEdited": "06.10.2023, 20:21:26",
+      "genres": ["Cartoons"]
+    },
+    {
+      "author": "Master Oogway",
+      "quote": "To make something special you just have to believe it’s special",
+      "id": 1696605742375,
+      "createdAt": "06.10.2023, 20:22:22",
+      "lastEdited": "06.10.2023, 20:22:22",
+      "genres": ["Cartoons"]
     }
   ]
 }
