@@ -33,7 +33,7 @@ npm run dev
 ```sh
 npm run server
 ```
-<p>Then go to the<a href='http://localhost:8080'>http://localhost:8080</a></p>
+<p>Then go to the<a href='http://localhost:5173'>http://localhost:5173</a></p>
 
 ### Compile and Minify for Production
 
