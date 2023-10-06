@@ -96,7 +96,7 @@ export default createStore({
       api
         .createQuote(payload)
         .then((res) => {
-          context.commit('SET_QUOTES', [...res.data, payload])
+          context.commit('SET_QUOTES', [...context.state.quotes, payload])
           context.commit('SET_LOADER', false)
         })
         .catch((e) => {
