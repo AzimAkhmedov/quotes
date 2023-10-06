@@ -27,7 +27,13 @@ const validateAuthorName = (name) => {
   if (name.match(/(\d+)/)) {
     return 'Name of author cant consist of numbers'
   }
-  return true
+  if (name.match(/^[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/)) {
+    return 'You are not allowed to place symbols'
+  }
+  if (name.match(/[\wа-я]+/ig) || name.match(/[^a-zA-Z]+/)) {
+    return true
+  }
+  return 'Use only russian or english letters'
 }
 
 const validateGenreName = () => {
@@ -40,6 +46,10 @@ const validateGenreName = () => {
 const handleAddGenre = () => {
   if (genre.value.length === 0) {
     alert('You need to fill genre name')
+    return
+  }
+  if (genre.value.match(/(\d+)/)) {
+    alert('Name of genre cant consist of numbers')
     return
   }
   if (genres.value.find((e) => e === genre.value)) {
